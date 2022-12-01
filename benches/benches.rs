@@ -2,7 +2,7 @@ use criterion::{criterion_main, Criterion, criterion_group};
 
 
 
-pub fn day1(c: &mut Criterion) {
+pub fn day1(_c: &mut Criterion) {
     // c.bench_function("aoc2021_day01_gen",|b| {
     //     b.iter_batched(|| {
     //         std::fs::read_to_string("input/2021/day1.txt").unwrap()

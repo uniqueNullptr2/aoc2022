@@ -7,7 +7,7 @@ fn run(day: usize) -> Option<AocResult>{
     std::fs::read_to_string(format!("inputs/day{:02}.txt", day)).ok().map(|s| {
         match day {
             1 => {
-                Some(run_day("AOC 2021 Day01", &s,
+                Some(run_day_mut("AOC 2021 Day01", &s,
                     day01::parse,
                     |input| day01::part1(input),
                     |input| day01::part2(input)))
@@ -217,6 +217,7 @@ pub fn execute(day: Option<usize>) {
     }
 }
 
+#[allow(dead_code)]
 fn run_day_mut<A, G, T1, T2, F1, F2>(name: &str, input: &str, gen: G, fn1: F1, fn2: F2) -> AocResult
 where T1: Display,
     T2: Display,
@@ -231,6 +232,7 @@ where T1: Display,
     AocResult::new(name, gen_time, p1.0, format!("{}", p1.1), p2.0, format!("{}", p2.1))
 }
 
+#[allow(dead_code)]
 fn run_day<A, G, T1, T2, F1, F2>(name: &str, input: &str, gen: G, fn1: F1, fn2: F2) -> AocResult
 where T1: Display,
     T2: Display,
