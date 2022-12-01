@@ -1,6 +1,4 @@
-use criterion::{criterion_main, Criterion, criterion_group};
-
-
+use criterion::{criterion_group, criterion_main, Criterion};
 
 pub fn day1(_c: &mut Criterion) {
     // c.bench_function("aoc2021_day01_gen",|b| {
@@ -24,7 +22,6 @@ pub fn day1(_c: &mut Criterion) {
     // });
 }
 
-
-criterion_group!( aoc2022,  day1);
+criterion_group!(aoc2022, day1);
 
 criterion_main!(aoc2022);
