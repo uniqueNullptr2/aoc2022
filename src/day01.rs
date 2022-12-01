@@ -13,6 +13,5 @@ pub fn part1(input: &mut Vec<u32>) -> u32 {
 
 pub fn part2(input: &mut Vec<u32>) -> u32 {
     input.sort();
-    input.reverse();
-    input.iter().take(3).sum()
+    input.iter().rev().take(3).sum()
 }
