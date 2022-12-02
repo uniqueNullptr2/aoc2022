@@ -7,11 +7,11 @@ pub fn parse(input: &str) -> Vec<u32> {
         .collect::<Vec<u32>>()
 }
 
-pub fn part1(input: &mut Vec<u32>) -> u32 {
+pub fn part1(input: &mut [u32]) -> u32 {
     *input.iter().max().unwrap()
 }
 
-pub fn part2(input: &mut Vec<u32>) -> u32 {
+pub fn part2(input: &mut [u32]) -> u32 {
     input.sort();
     input.iter().rev().take(3).sum()
 }

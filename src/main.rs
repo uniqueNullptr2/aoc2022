@@ -3,6 +3,7 @@ use clap::Parser;
 
 mod aoc;
 mod day01;
+mod day02;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]

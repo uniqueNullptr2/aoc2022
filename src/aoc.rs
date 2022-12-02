@@ -4,6 +4,7 @@ use std::{
 };
 
 use crate::day01;
+use crate::day02;
 
 fn run(day: usize) -> Option<AocResult> {
     std::fs::read_to_string(format!("inputs/day{:02}.txt", day))
@@ -17,12 +18,13 @@ fn run(day: usize) -> Option<AocResult> {
                     |input| day01::part1(input),
                     |input| day01::part2(input),
                 )),
-                // 2 => {
-                //     Some(self.run_day("AOC 2021 Day02", &s,
-                //         aoc2::input_generator,
-                //         |input| aoc2::solve_part1(input),
-                //         |input| aoc2::solve_part2(input)))
-                // },
+                2 => Some(run_day_mut(
+                    "AOC 2021 Day02",
+                    &s,
+                    day02::parse,
+                    |input| day02::part1(input),
+                    |input| day02::part2(input),
+                )),
                 // 3 => {
                 //     Some(self.run_day("AOC 2021 Day03", &s,
                 //         aoc3::input_generator,
@@ -216,7 +218,7 @@ pub fn execute(day: Option<usize>) {
             None => println!("Solution or file for day {} not found", day),
         }
     } else {
-        let results = (1..=25).map(|i| run(i)).collect::<Vec<Option<AocResult>>>();
+        let results = (1..=25).map(run).collect::<Vec<Option<AocResult>>>();
         let l = results.iter().flatten().count() as f64;
         if l == 0.0 {
             return;
