@@ -1,7 +1,5 @@
 use std::collections::HashSet;
 
-use itertools::Itertools;
-
 pub fn parse(input: &str) -> Vec<String> {
     input.lines().map(|l| l.to_owned()).collect::<Vec<String>>()
 }
