@@ -3,7 +3,7 @@ use std::{
     time::{Duration, Instant},
 };
 
-use crate::{day01, day02, day03, day04, day05};
+use crate::{day01, day02, day03, day04, day05, day06, day07};
 
 fn run(day: usize) -> Option<AocResult> {
     std::fs::read_to_string(format!("inputs/day{:02}.txt", day))
@@ -43,6 +43,20 @@ fn run(day: usize) -> Option<AocResult> {
                 day05::parse,
                 |input| day05::part1(input),
                 |input| day05::part2(input),
+            )),
+            6 => Some(run_day(
+                "AOC 2021 Day06",
+                &s,
+                day06::parse,
+                |input| day06::part1(input),
+                |input| day06::part2(input),
+            )),
+            7 => Some(run_day_mut(
+                "AOC 2021 Day07",
+                &s,
+                day07::parse,
+                |input| day07::part1(input),
+                |input| day07::part2(input),
             )),
             _ => None,
         })
