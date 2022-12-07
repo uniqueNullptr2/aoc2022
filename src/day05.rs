@@ -1,8 +1,10 @@
+use std::collections::VecDeque;
+
 pub fn parse(input: &str) -> (Vec<Vec<char>>, Vec<(u32, u32, u32)>) {
     let mut v = vec![];
     let mut lines = input.lines();
     loop {
-        let mut vv = vec![];
+        let mut vv = VecDeque::new();
         let mut line = lines.next().unwrap().chars();
         let mut flag = false;
         loop {
@@ -13,8 +15,7 @@ pub fn parse(input: &str) -> (Vec<Vec<char>>, Vec<(u32, u32, u32)>) {
                     flag = true;
                     break;
                 }
-                Some(x) if x != ' ' => vv.push(x),
-                Some(_) => (),
+                Some(x) => vv.push_back(x),
                 None => break,
             }
             line.next();
@@ -27,8 +28,18 @@ pub fn parse(input: &str) -> (Vec<Vec<char>>, Vec<(u32, u32, u32)>) {
         v.push(vv)
     }
 
+    let mut r = vec![];
+    for _ in 0..v[0].len() {
+        let mut rr = vec![];
+        for i in (0..v.len()).rev() {
+            let ch = v[i].pop_front().unwrap();
+            if ch != ' ' {
+                rr.push(ch);
+            }
+        }
+        r.push(rr);
+    }
     lines.next();
-
     let n = lines
         .map(|l| {
             let mut f = l.split(' ');
@@ -41,24 +52,34 @@ pub fn parse(input: &str) -> (Vec<Vec<char>>, Vec<(u32, u32, u32)>) {
             (x, y, z)
         })
         .collect();
-    (v, n)
+    (r, n)
 }
 
 pub fn part1(input: &mut (Vec<Vec<char>>, Vec<(u32, u32, u32)>)) -> String {
     let (towers, n) = input;
     for (n, from, to) in n.iter() {
-        print_tower(towers);
         for _ in 0..*n {
             let x = towers[*from as usize - 1].pop().unwrap();
             towers[*to as usize - 1].push(x);
         }
     }
-    print_tower(towers);
     towers.iter().filter_map(|t| t.last()).collect()
 }
 
-pub fn part2(input: &mut (Vec<Vec<char>>, Vec<(u32, u32, u32)>)) -> u32 {
-    42
+pub fn part2(input: &mut (Vec<Vec<char>>, Vec<(u32, u32, u32)>)) -> String {
+    let (towers, n) = input;
+    let mut stack = vec![];
+
+    for (n, from, to) in n.iter() {
+        for _ in 0..*n {
+            let x = towers[*from as usize - 1].pop().unwrap();
+            stack.push(x);
+        }
+        while let Some(x) = stack.pop() {
+            towers[*to as usize - 1].push(x);
+        }
+    }
+    towers.iter().filter_map(|t| t.last()).collect()
 }
 
 fn print_tower(v: &Vec<Vec<char>>) {
